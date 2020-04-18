@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - tile
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Bg1
+    uniqueID: 2951423917
+    locked: 0
+  - name: Edibles
+    uniqueID: 1350276867
+    locked: 0
+  - name: Player
+    uniqueID: 2266861891
+    locked: 0
+  - name: VisualLandmark
+    uniqueID: 1032340065
+    locked: 0
+  - name: Bg2
+    uniqueID: 4067436173
+    locked: 0
+  - name: Bg3
+    uniqueID: 2274742451
     locked: 0
