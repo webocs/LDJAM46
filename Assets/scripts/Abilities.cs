@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Abilities : MonoBehaviour
@@ -8,11 +6,10 @@ public class Abilities : MonoBehaviour
     Vision vision;
     Food food;
     public GameObject visualLandmark;
-    
 
+    PlayerController playerController;
     float visionCycle = 2.0f;
     float visionTimer;
-
     int visionUpgrade = 1;
     int previousVisionAoe;
     int checkVision;
@@ -20,6 +17,7 @@ public class Abilities : MonoBehaviour
 
     private void Awake()
     {
+        playerController = GetComponent<PlayerController>();
         vision = GetComponent<Vision>();
         food = GetComponent<Food>();
         checkVision = 0;
@@ -27,7 +25,7 @@ public class Abilities : MonoBehaviour
 
     public void flapWings()
     {
-        if (food.currentFood > 1)
+        if (food.currentFood > 1 && vision.visionAoe <= vision.MAX_VISION_AOE)
         {
             previousVisionAoe = vision.visionAoe;
             vision.visionAoe += visionUpgrade;
@@ -64,7 +62,8 @@ public class Abilities : MonoBehaviour
 
     public void flightTo(Vector2 position)
     {
-        transform.position = position;
+        IEnumerator co = smoothFlight(position);
+        StartCoroutine(co);
     }
 
     private void Update()
@@ -83,5 +82,23 @@ public class Abilities : MonoBehaviour
             }    
     }
 
-   
+    IEnumerator smoothFlight(Vector2 position)
+    {
+        float startime = Time.time;
+        Vector2 startPosition = transform.position; //Starting position.
+        Vector2 endPosition = position; //Ending position.
+        Vector2 direction = endPosition - startPosition;
+        direction.Normalize();
+
+        while (Vector2.Distance(transform.position, endPosition) > 0.1f && ((Time.time - startime) * playerController.moveSpeed) < 1f)
+        {
+            Debug.Log(Vector2.Distance(startPosition, endPosition));
+            float move = Mathf.Lerp(0, 1, (Time.time - startime) * playerController.moveSpeed);
+            transform.position += (Vector3)(direction * move);
+            yield return null;
+        }
+        transform.position = endPosition;
+    }
+
+
 }

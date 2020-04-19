@@ -59,9 +59,9 @@ public class MapManager : MonoBehaviour
            
     }
 
-    internal static List<Tile> getSurounding(Vector2 position, bool onlyWalkables)
+    internal static List<Vector2> getSurounding(Vector2 position, bool onlyWalkables)
     {
-        List<Tile> returnTiles = new List<Tile>();
+        List<Vector2> returnDirections = new List<Vector2>();
         Tile upTile, downTile, leftTile, rightTile = null;
         try
         {
@@ -95,12 +95,12 @@ public class MapManager : MonoBehaviour
         {
             rightTile = null;
         }
-        if (upTile && (!onlyWalkables || upTile.isWalkable)) returnTiles.Add(upTile);
-        if (downTile && (!onlyWalkables || downTile.isWalkable)) returnTiles.Add(downTile);
-        if (leftTile && (!onlyWalkables || leftTile.isWalkable)) returnTiles.Add(leftTile);
-        if (rightTile && (!onlyWalkables || rightTile.isWalkable)) returnTiles.Add(rightTile);        
+        if (upTile && (!onlyWalkables || upTile.isWalkable)) returnDirections.Add(Vector2.up);
+        if (downTile && (!onlyWalkables || downTile.isWalkable)) returnDirections.Add(Vector2.down);
+        if (leftTile && (!onlyWalkables || leftTile.isWalkable)) returnDirections.Add(Vector2.left);
+        if (rightTile && (!onlyWalkables || rightTile.isWalkable)) returnDirections.Add(Vector2.right);        
   
-        return returnTiles;
+        return returnDirections;
     }
 
     public static void registerTile(Vector2 position, Tile tile)

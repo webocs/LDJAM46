@@ -9,6 +9,7 @@ public class Vision : MonoBehaviour
     private Vector2 lastPosition;
     private bool requiresUpdate;
     private bool firstRoll;
+    public int MAX_VISION_AOE = 3;
     // Update is called once per frame
 
     private void Awake()

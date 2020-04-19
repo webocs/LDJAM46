@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2667210228309188770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.25, z: 0.65747595}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0.65747595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2667210229350380876}
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2667210229350380882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2667210228309188701}
@@ -125,5 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d851ca926ad1040801c78bf631d11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementDelay: 1
   nutrition: 1
+  ignoreVisibilityCheck: 0
+  cycledSound: {fileID: 0}
+  eatSound: {fileID: 0}
+  movementDelay: 1
+  reRollDelay: 0
+  moveSpeed: 0

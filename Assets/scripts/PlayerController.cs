@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip moveSound;
+
     Abilities abilities;
     GameManager gameManager;
+    public float moveSpeed;
     const int UPPER_BOUNDARY = 10;
     const int RIGHT_BOUNDARY = 10;
+    private bool isMoving;
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,37 +27,40 @@ public class PlayerController : MonoBehaviour
 
     void checkMovement()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (!isMoving)
         {
-            movePlayer(Vector2.up);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            movePlayer(Vector2.down);
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            movePlayer(Vector2.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            movePlayer(Vector2.right);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            abilities.flapWings();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            abilities.eat();
-        } 
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            abilities.leaveVisualLandmark();
-        }  
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            abilities.recall();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                movePlayer(Vector2.up);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                movePlayer(Vector2.down);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                movePlayer(Vector2.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                movePlayer(Vector2.right);
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                abilities.flapWings();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                abilities.eat();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                abilities.leaveVisualLandmark();
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                abilities.recall();
+            }
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -97,9 +104,35 @@ public class PlayerController : MonoBehaviour
             abilities.consumeFood(1);
             Tile targetTile = MapManager.tileAt((Vector2)transform.position + direction);
             Debug.Log(targetTile);
-            if(targetTile && targetTile.isWalkable)
-                transform.Translate(direction);
+            if (targetTile && targetTile.isWalkable)
+            {
+                IEnumerator co = smoothTranslate(direction);
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = moveSound;
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .5f;
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
+                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = 1f;
+
+                StartCoroutine(co);
+            }
         }
 
+    }
+
+    IEnumerator smoothTranslate(Vector2 direction)
+    {
+        isMoving = true;
+        float startime = Time.time;
+        Vector2 startPostion = transform.position; //Starting position.
+        Vector2 endPosition = (Vector2)transform.position + direction; //Ending position.
+
+        while (Vector2.Distance(transform.position,endPosition)> 0.1f && ((Time.time - startime) * moveSpeed) < 1f)
+        {
+            Debug.Log(Vector2.Distance(startPostion, endPosition));
+            float move = Mathf.Lerp(0, 1, (Time.time - startime) * moveSpeed);
+            transform.position += (Vector3)(direction * move);
+            yield return null;
+        }
+        isMoving = false;
+        transform.position = endPosition;
     }
 }

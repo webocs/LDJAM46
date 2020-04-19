@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    const int MAX_FOOD= 15;
-    private float autoFoodConsumeCycle = 3.0f;
+    public static int MAX_FOOD= 15;
+    private float autoFoodConsumeCycle = 10.0f;
     public int currentFood;
     public UITxtCurrentFood txtFood;
 
