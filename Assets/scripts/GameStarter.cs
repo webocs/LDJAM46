@@ -20,7 +20,8 @@ public class GameStarter : MonoBehaviour
 
      void Update()
     {
-       
+        if (Input.GetKeyDown(KeyCode.Return))
+            changeLevel();
     }
     void changeLevel()
     {
