@@ -42,6 +42,7 @@ public class Insect : Edible
         Vector2 targetMove = availableMoves[Random.Range(0, availableMoves.Count)];
         IEnumerator co = smoothTranslate(targetMove);
         StartCoroutine(co);
+        MakeNoise();
     }
 
     private void rollForNoise()
@@ -49,8 +50,7 @@ public class Insect : Edible
         if (reRollTimer < 0)
         {
             reRollTimer = reRollDelay;
-            int dice = Random.Range(0, 20);
-            if (dice > 5 && dice < 7) MakeNoise();
+            int dice = Random.Range(0, 20);            
         }
         else
         {

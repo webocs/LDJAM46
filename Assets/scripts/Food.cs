@@ -7,20 +7,17 @@ public class Food : MonoBehaviour
     public static int MAX_FOOD= 15;
     private float autoFoodConsumeCycle = 10.0f;
     public int currentFood;
-    public UITxtCurrentFood txtFood;
 
     private float autoConsumeTimer;
     void Awake()
     {
         currentFood = MAX_FOOD;
         autoConsumeTimer = autoFoodConsumeCycle;
-        txtFood = FindObjectOfType<UITxtCurrentFood>();
     }
 
     public void restore(int qty)
     {
         currentFood += qty;
-        txtFood.UpdateFood(currentFood);
     }
 
     public void consume(int qty)
@@ -28,7 +25,6 @@ public class Food : MonoBehaviour
         if (currentFood > 0)
         {
             currentFood -= qty;
-            txtFood.UpdateFood(currentFood);
         }
         if(currentFood == 0)
         {

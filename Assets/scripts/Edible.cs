@@ -8,7 +8,7 @@ public class Edible : MonoBehaviour
     public bool ignoreVisibilityCheck;
     public AudioClip cycledSound;
     public AudioClip eatSound;
-
+    public GameObject ripple;
  
     public int eat()
     {
@@ -22,7 +22,7 @@ public class Edible : MonoBehaviour
     {
         GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = cycledSound;
         GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
-        MapManager.tileAt(transform.position).visibleFor(1.5f);
+        GameObject r = Instantiate(ripple, transform.position, Quaternion.identity);               
     }
 
     protected virtual void calculateVisibility()

@@ -5,16 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    Fader fader;
     public AudioClip restartSound;
+    public GameObject victoryPrefab;
+    private float nextLevelActionTimer= 2.0f;
+
+    bool inVictoryScreen;
+    Fader fader;
+
     private void Awake()
     {
         fader = FindObjectOfType<Fader>();
+        inVictoryScreen = false;
     }
     public void gameOver()
     {
+        if (!inVictoryScreen)
+        {
+            fader.fadeIn();
+            reload();
+        }
+    }
+
+    public void checkVictory()
+    {      
+        List<Edible> edibles = MapManager.getRemainingEdibles();
+        if(edibles.Count==0)
+        {
+            showVictoryMessage();            
+        }      
+    }
+    void showVictoryMessage()
+    {
         fader.fadeIn();
-        reload();
+        inVictoryScreen = true;
+        GameObject vPf = Instantiate(victoryPrefab);               
+    }
+    public void goToNextLevel() {      
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void restart()
@@ -28,6 +55,17 @@ public class GameManager : MonoBehaviour
     private void reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void Update()
+    {
+        checkVictory();
+        if(inVictoryScreen)
+        {
+            if(nextLevelActionTimer<0 && Input.anyKey)
+                goToNextLevel();
+            nextLevelActionTimer -= Time.deltaTime;
+        }
     }
 }
 

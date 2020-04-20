@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2667210228309188770}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0.65747595}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.12, y: 0, z: 0.65747595}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 2667210229350380876}
   m_RootOrder: 0
@@ -70,12 +70,13 @@ SpriteRenderer:
   m_SortingLayerID: 1350276867
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 507994fa32de3b942aa11aceddc558d4, type: 3}
+  m_Sprite: {fileID: 1037149184471470094, guid: afd5f96ec15da09439b969bc5905a2e4,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,10 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d851ca926ad1040801c78bf631d11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutrition: 1
+  nutrition: 2
   ignoreVisibilityCheck: 0
-  cycledSound: {fileID: 0}
-  eatSound: {fileID: 0}
-  movementDelay: 1
-  reRollDelay: 0
-  moveSpeed: 0
+  cycledSound: {fileID: 8300000, guid: 367e69cab9cf2d849a140bc5da9cc35d, type: 3}
+  eatSound: {fileID: 8300000, guid: 7e53f27e47ada70489234b824c5e6be1, type: 3}
+  ripple: {fileID: 5314054968778471507, guid: e5f6a73f3ce40224a9999acb1a16b80a, type: 3}
+  movementDelay: 3
+  reRollDelay: 3
+  moveSpeed: 0.05

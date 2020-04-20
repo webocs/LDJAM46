@@ -9,14 +9,18 @@ public class PlayerController : MonoBehaviour
     Abilities abilities;
     GameManager gameManager;
     public float moveSpeed;
-    const int UPPER_BOUNDARY = 10;
-    const int RIGHT_BOUNDARY = 10;
+    const int UPPER_BOUNDARY = 15;
+    const int RIGHT_BOUNDARY = 15;
     private bool isMoving;
+    private Animator animator;
+    private bool goingRight;
     // Start is called before the first frame update
     void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         abilities = GetComponent<Abilities>();
+        animator = GetComponent<Animator>();
+        goingRight = true;
     }
 
     // Update is called once per frame
@@ -40,10 +44,21 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.A))
             {
                 movePlayer(Vector2.left);
+                if (goingRight)
+                {
+                    animator.SetTrigger("goLeft");
+                    goingRight = false;
+                }
+
             }
             else if (Input.GetKeyDown(KeyCode.D))
             {
                 movePlayer(Vector2.right);
+                if (!goingRight)
+                {
+                    animator.SetTrigger("goRight");
+                    goingRight = true;
+                }
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -103,15 +118,11 @@ public class PlayerController : MonoBehaviour
         {
             abilities.consumeFood(1);
             Tile targetTile = MapManager.tileAt((Vector2)transform.position + direction);
-            Debug.Log(targetTile);
             if (targetTile && targetTile.isWalkable)
             {
                 IEnumerator co = smoothTranslate(direction);
                 GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = moveSound;
-                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = .5f;
                 GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
-                GameObject.Find("SoundPlayer").GetComponent<AudioSource>().volume = 1f;
-
                 StartCoroutine(co);
             }
         }
@@ -125,9 +136,8 @@ public class PlayerController : MonoBehaviour
         Vector2 startPostion = transform.position; //Starting position.
         Vector2 endPosition = (Vector2)transform.position + direction; //Ending position.
 
-        while (Vector2.Distance(transform.position,endPosition)> 0.1f && ((Time.time - startime) * moveSpeed) < 1f)
+        while (Vector2.Distance(transform.position,endPosition)> 0.1f )
         {
-            Debug.Log(Vector2.Distance(startPostion, endPosition));
             float move = Mathf.Lerp(0, 1, (Time.time - startime) * moveSpeed);
             transform.position += (Vector3)(direction * move);
             yield return null;

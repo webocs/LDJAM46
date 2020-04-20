@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252811566741229489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: -0.021, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8252811568062815107}
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 1350276867
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bf2d7600878dc0144b08713e7823f71e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6c1e04a2f8856047a1d281dbcde689f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0aaf3f61d8ad1841b372a08ec344dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nutrition: 0
+  nutrition: 7
   ignoreVisibilityCheck: 0
   cycledSound: {fileID: 0}
-  eatSound: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: bde62320d2d7f2a41a355e96f7f5fe05, type: 3}
+  ripple: {fileID: 5314054968778471507, guid: e5f6a73f3ce40224a9999acb1a16b80a, type: 3}

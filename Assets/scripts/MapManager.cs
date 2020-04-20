@@ -29,6 +29,24 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    internal static List<Edible> getRemainingEdibles()
+    {
+        return edibles;
+    }
+
+    public static int getRemaining<T>()
+    {
+        int remaining = 0;
+        if (edibles.Count > 0)
+        {
+            foreach (Edible e in edibles)
+            {
+                if (e is T) { remaining++; }
+            }
+        }
+        return remaining;
+    }
+
     public static Edible getEdibleAt(Vector2 position)
     {
         Edible retEdible = null;
