@@ -18,6 +18,10 @@ public class GameStarter : MonoBehaviour
         Invoke("changeLevel", 1);
     }
 
+     void Update()
+    {
+       
+    }
     void changeLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
