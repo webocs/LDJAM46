@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         Vector2 startPostion = transform.position; //Starting position.
         Vector2 endPosition = (Vector2)transform.position + direction; //Ending position.
 
-        while (Vector2.Distance(transform.position,endPosition)> 0.1f )
+        while (Vector2.Distance(transform.position,endPosition)> 0.3f && ((Time.time - startime) * moveSpeed) < 1f)
         {
             float move = Mathf.Lerp(0, 1, (Time.time - startime) * moveSpeed);
             transform.position += (Vector3)(direction * move);

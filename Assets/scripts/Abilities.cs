@@ -90,7 +90,7 @@ public class Abilities : MonoBehaviour
         Vector2 direction = endPosition - startPosition;
         direction.Normalize();
 
-        while (Vector2.Distance(transform.position, endPosition) > 0.1f && ((Time.time - startime) * playerController.moveSpeed) < 1f)
+        while (Vector2.Distance(transform.position, endPosition) > 0.3f && ((Time.time - startime) * playerController.moveSpeed) < 1f)
         {
             Debug.Log(Vector2.Distance(startPosition, endPosition));
             float move = Mathf.Lerp(0, 1, (Time.time - startime) * playerController.moveSpeed);
