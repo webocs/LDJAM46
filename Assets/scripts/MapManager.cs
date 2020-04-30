@@ -77,6 +77,14 @@ public class MapManager : MonoBehaviour
            
     }
 
+    internal static void tick()
+    {
+       foreach(Edible e in edibles)
+        {
+            e.move();
+        }
+    }
+
     internal static List<Vector2> getSurounding(Vector2 position, bool onlyWalkables)
     {
         List<Vector2> returnDirections = new List<Vector2>();

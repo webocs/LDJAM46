@@ -5,14 +5,11 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     public static int MAX_FOOD= 15;
-    private float autoFoodConsumeCycle = 10.0f;
     public int currentFood;
 
-    private float autoConsumeTimer;
     void Awake()
     {
         currentFood = MAX_FOOD;
-        autoConsumeTimer = autoFoodConsumeCycle;
     }
 
     public void restore(int qty)
@@ -32,17 +29,4 @@ public class Food : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    { 
-        if (autoConsumeTimer < 0)
-        {
-            consume(1);
-            autoConsumeTimer = autoFoodConsumeCycle;
-        }
-        else
-        {
-            autoConsumeTimer -= Time.deltaTime;
-        }
-    }
 }

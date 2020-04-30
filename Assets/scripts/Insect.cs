@@ -7,15 +7,18 @@ public class Insect : Edible
     public float movementDelay;
     public float reRollDelay;
     public float moveSpeed;
-
+    
     private float reRollTimer;
     private float movementTimer;
     private bool isMoving;
-    
+    private int MOVE_EVERY_TURNS = 2;
+    private int movementStepper;
+
     // Start is called before the first frame update
     void Start()
     {
         movementTimer = movementDelay;
+        movementStepper = MOVE_EVERY_TURNS; 
         isMoving = false;
     }
 
@@ -25,24 +28,23 @@ public class Insect : Edible
         ignoreVisibilityCheck = isMoving;
         calculateVisibility();
         if (!isMoving)
-        {
-            movementTimer -= Time.deltaTime;
-            if (movementTimer < 0)
-            {
-                move();
-                movementTimer = movementDelay;
-            }
+        {           
             rollForNoise();
         }
     }
 
-    private void move()
+    override public void move()
     {
-        List<Vector2> availableMoves = MapManager.getSurounding((Vector2)transform.position, true);
-        Vector2 targetMove = availableMoves[Random.Range(0, availableMoves.Count)];
-        IEnumerator co = smoothTranslate(targetMove);
-        StartCoroutine(co);
-        MakeNoise();
+        movementStepper -= 1;
+        if (movementStepper <= 0)
+        {
+            List<Vector2> availableMoves = MapManager.getSurounding((Vector2)transform.position, true);
+            Vector2 targetMove = availableMoves[Random.Range(0, availableMoves.Count)];
+            IEnumerator co = smoothTranslate(targetMove);
+            StartCoroutine(co);
+            MakeNoise();
+            movementStepper = MOVE_EVERY_TURNS;
+        } 
     }
 
     private void rollForNoise()

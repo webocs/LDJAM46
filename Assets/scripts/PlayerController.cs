@@ -116,7 +116,6 @@ public class PlayerController : MonoBehaviour
 
         if (canMove)
         {
-            abilities.consumeFood(1);
             Tile targetTile = MapManager.tileAt((Vector2)transform.position + direction);
             if (targetTile && targetTile.isWalkable)
             {
@@ -124,6 +123,9 @@ public class PlayerController : MonoBehaviour
                 GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = moveSound;
                 GameObject.Find("SoundPlayer").GetComponent<AudioSource>().Play();
                 StartCoroutine(co);
+                abilities.consumeFood(1);
+                gameManager.tick();
+
             }
         }
 

@@ -18,6 +18,9 @@ public class Edible : MonoBehaviour
         Destroy(gameObject);
         return nutrition;
     }
+
+    public virtual void move() { }
+
     protected virtual void MakeNoise()
     {
         GameObject.Find("SoundPlayer").GetComponent<AudioSource>().clip = cycledSound;
